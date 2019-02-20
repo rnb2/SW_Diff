@@ -220,7 +220,7 @@ public class MainFrame extends JFrame {
 
 		String fullReport = "";
 		if(checkBox.isSelected())
-			fullReport = "";
+			fullReport = " --full";
 
 		//String pathLib = "java -jar " + C_TOOLS_DIFF_TOOL_DIFFER_1_0_SNAPSHOT_JAR + " -i \"";
 		//java -jar "C:\tools\differ_2.5.2\differ-1.0-SNAPSHOT.jar" -i
@@ -243,6 +243,7 @@ public class MainFrame extends JFrame {
 				.addCommandPath2(path2)
 				.addPathDirOut(path3)
 				.addNameOut(fieldLog.getText() + ".txt")
+				.addFullReport(fullReport)
 				.addContainer(MainFrame.this)
 				;
 

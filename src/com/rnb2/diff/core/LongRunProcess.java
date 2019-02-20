@@ -12,6 +12,7 @@ public class LongRunProcess extends SwingWorker {
 
     private  String nameTool;
     private  String nameOut;
+    private  String fullReport;
 
     private  String commandPathDirTool;
     private  String commandPathDirOut;
@@ -30,13 +31,24 @@ public class LongRunProcess extends SwingWorker {
     private void doGo(){
         try {
             ProcessBuilder pb = new ProcessBuilder();
-            pb.command("java","-jar",
+            if(!fullReport.isEmpty()){
+                pb.command("java","-jar",
+                        commandPathDirTool+"\\"+nameTool,
+                        "-i", commandPath1,
+                        "-j", commandPath2,
+                        "-o", commandPathDirOut + "\\" + nameOut,
+                        "--full", ""
+                );
+            }else {
+                pb.command("java","-jar",
                     commandPathDirTool+"\\"+nameTool,
                     "-i", commandPath1,
                     "-j", commandPath2,
                     "-o", commandPathDirOut + "\\" + nameOut
+                );
+            }
 
-            );
+
                 /*pb.command("java","-jar", "c:\\Tools\\Diff_tool\\differ-1.0-SNAPSHOT.jar","-i",
                         "C:\\Work\\Tasks\\NDSAKELA-10226\\pp-11\\fb\\UR11402\\ROOT.NDS","-j",
                         "C:\\Work\\Tasks\\NDSAKELA-10226\\pp-13\\fb\\UR11402\\ROOT.NDS", "-o",
@@ -98,6 +110,11 @@ public class LongRunProcess extends SwingWorker {
 
     public LongRunProcess addNameOut(String name){
         this.nameOut = name;
+        return this;
+    }
+
+    public LongRunProcess addFullReport(String name){
+        this.fullReport = name;
         return this;
     }
 
