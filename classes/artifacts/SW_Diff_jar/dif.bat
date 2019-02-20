@@ -1,0 +1,1 @@
+start javaw -jar SW_Diff.jar
