@@ -8,21 +8,23 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * @author budukh
+ */
 public class LongRunProcess extends SwingWorker {
 
     private  String nameTool;
     private  String nameOut;
     private  String fullReport;
-
     private  String commandPathDirTool;
     private  String commandPathDirOut;
     private  String commandPath1;
     private  String commandPath2;
-    private JFrame container;
+
+    private  JFrame container;
 
     @Override
     protected Object doInBackground() throws Exception {
-
         int result = -2;
         OperationExecutor.getInstance().execute(taskGo, container);
         return result;
@@ -37,7 +39,7 @@ public class LongRunProcess extends SwingWorker {
                         "-i", commandPath1,
                         "-j", commandPath2,
                         "-o", commandPathDirOut + "\\" + nameOut,
-                        "--full", ""
+                        fullReport, ""
                 );
             }else {
                 pb.command("java","-jar",
@@ -47,13 +49,11 @@ public class LongRunProcess extends SwingWorker {
                     "-o", commandPathDirOut + "\\" + nameOut
                 );
             }
-
-
-                /*pb.command("java","-jar", "c:\\Tools\\Diff_tool\\differ-1.0-SNAPSHOT.jar","-i",
+            /*pb.command("java","-jar", "c:\\Tools\\Diff_tool\\differ-1.0-SNAPSHOT.jar","-i",
                         "C:\\Work\\Tasks\\NDSAKELA-10226\\pp-11\\fb\\UR11402\\ROOT.NDS","-j",
                         "C:\\Work\\Tasks\\NDSAKELA-10226\\pp-13\\fb\\UR11402\\ROOT.NDS", "-o",
                         "C:\\Tmp\\summary_log23.txt");
-                pb.directory(new File("c:\\Tools\\Diff_tool\\"));*/
+            pb.directory(new File("c:\\Tools\\Diff_tool\\"));*/
             pb.directory(new File(commandPathDirTool));
             pb.redirectErrorStream(true);
             Process process = pb.start();
@@ -67,7 +67,7 @@ public class LongRunProcess extends SwingWorker {
                 builder.append(System.getProperty("line.separator"));
             }
             String rs = builder.toString();
-            System.out.println("result = " + rs);
+            //System.out.println("result = " + rs);
 
         } catch (IOException  e1) {
             e1.printStackTrace();
