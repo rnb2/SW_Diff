@@ -58,7 +58,7 @@ public class LongRunProcess extends SwingWorker {
             pb.redirectErrorStream(true);
             Process process = pb.start();
 
-            BufferedReader reader =
+           /* BufferedReader reader =
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String line = null;
@@ -66,7 +66,7 @@ public class LongRunProcess extends SwingWorker {
                 builder.append(line);
                 builder.append(System.getProperty("line.separator"));
             }
-            String rs = builder.toString();
+            String rs = builder.toString();*/
             //System.out.println("result = " + rs);
 
         } catch (IOException  e1) {

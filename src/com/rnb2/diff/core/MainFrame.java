@@ -21,6 +21,8 @@ import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
 
+import static java.lang.Thread.*;
+
 /**
  * @author budukh
  */
@@ -230,6 +232,12 @@ public class MainFrame extends JFrame {
                     JOptionPane.showMessageDialog(MainFrame.this, "Done!!!");
 
                     if (checkBox2.isSelected()){
+                        System.out.println("pcEvt.getNewValue()=" + pcEvt.getNewValue() + " old="  + pcEvt.getOldValue());
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                         openLogFile(String.format("%s\\%s", path3, fileNameLog));
                     }
                 }

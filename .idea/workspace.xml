@@ -7,8 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c7447424-8ccd-4415-922a-6057b84bbb33" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/SW_Diff_jar/SW_Diff.jar" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/SW_Diff_jar/SW_Diff.jar" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/rnb2/diff/core/LongRunProcess.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/rnb2/diff/core/LongRunProcess.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/rnb2/diff/core/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/rnb2/diff/core/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/bin/" />
@@ -27,8 +28,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="248">
-              <caret line="490" column="59" lean-forward="true" selection-start-line="490" selection-start-column="59" selection-end-line="490" selection-end-column="59" />
+            <state relative-caret-position="148">
+              <caret line="233" column="33" lean-forward="true" selection-start-line="233" selection-start-column="33" selection-end-line="233" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#14795#14959#0" expanded="true" />
@@ -51,7 +52,7 @@
         <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/java/lang/Character.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-4247">
-              <caret line="588" column="33" lean-forward="true" selection-start-line="588" selection-start-column="33" selection-end-line="588" selection-end-column="33" />
+              <caret line="588" column="33" selection-start-line="588" selection-start-column="33" selection-end-line="588" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -73,7 +74,7 @@
         <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/javax/swing/JCheckBox.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
-              <caret line="77" column="37" lean-forward="true" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
+              <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -82,7 +83,16 @@
         <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/javax/swing/JToggleButton.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="173">
-              <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+              <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/com/rnb2/diff/utils/InfiniteProgressPanel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="303">
+              <caret line="284" column="13" selection-start-line="284" selection-start-column="13" selection-end-line="284" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -90,8 +100,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/LongRunProcess.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="354">
-              <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
+            <state relative-caret-position="849">
+              <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -111,9 +121,10 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>txt2</find>
-      <find>go</find>
       <find>check</find>
       <find>System.out.println</find>
+      <find>go</find>
+      <find>thread</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -308,6 +319,24 @@
     <MESSAGE value="initial commit" />
     <option name="LAST_COMMIT_MESSAGE" value="initial commit" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java</url>
+          <line>228</line>
+          <properties />
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java</url>
+          <line>223</line>
+          <properties />
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/LongProcess.java" />
     <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/java/util/concurrent/FutureTask.java">
@@ -376,13 +405,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/com/rnb2/diff/utils/InfiniteProgressPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="714">
-          <caret line="58" column="13" selection-start-line="58" selection-start-column="13" selection-end-line="58" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/com/rnb2/diff/utils/SwingUtils.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="68">
@@ -421,31 +443,21 @@
     <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/javax/swing/JToggleButton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
-          <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/javax/swing/JCheckBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="173">
-          <caret line="77" column="37" lean-forward="true" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
+          <caret line="77" column="37" selection-start-line="77" selection-start-column="37" selection-end-line="77" selection-end-column="37" />
         </state>
       </provider>
     </entry>
     <entry file="jar://C:/Tools/Java/jdk1.8.0_144/src.zip!/java/lang/Character.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4247">
-          <caret line="588" column="33" lean-forward="true" selection-start-line="588" selection-start-column="33" selection-end-line="588" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/LongRunProcess.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="354">
-          <caret line="76" column="22" selection-start-line="76" selection-start-column="22" selection-end-line="76" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <caret line="588" column="33" selection-start-line="588" selection-start-column="33" selection-end-line="588" selection-end-column="33" />
         </state>
       </provider>
     </entry>
@@ -456,10 +468,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/LongRunProcess.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="849">
+          <caret line="51" column="22" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="22" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/com/rnb2/diff/utils/InfiniteProgressPanel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="303">
+          <caret line="284" column="13" selection-start-line="284" selection-start-column="13" selection-end-line="284" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/rnb2/diff/core/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="248">
-          <caret line="490" column="59" lean-forward="true" selection-start-line="490" selection-start-column="59" selection-end-line="490" selection-end-column="59" />
+        <state relative-caret-position="148">
+          <caret line="233" column="33" lean-forward="true" selection-start-line="233" selection-start-column="33" selection-end-line="233" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#14795#14959#0" expanded="true" />
