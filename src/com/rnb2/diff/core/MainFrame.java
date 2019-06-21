@@ -1,8 +1,6 @@
 package com.rnb2.diff.core;
 
 
-import com.sun.istack.internal.NotNull;
-
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
@@ -14,17 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.io.*;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
 
-import static java.lang.Thread.*;
-
 /**
- * @author budukh
+ * @author budukh.rn
  */
 public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
@@ -77,7 +71,7 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//com.jgoodies.looks.plastic.Plastic3DLookAndFeel//"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//com.jgoodies.looks.plastic.Plastic3DLookAndFeel//"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//javax.swing.plaf.metal.MetalLookAndFeel
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -221,28 +215,24 @@ public class MainFrame extends JFrame {
                 .addPathDirOut(path3)
                 .addNameOut(fieldLog.getText() + ".txt")
                 .addFullReport(fullReport)
-                .addContainer(MainFrame.this);
+                .addContainer(MainFrame.this)
+                .addOpenAfter(checkBox2.isSelected());
 
         final String fileNameLog = fieldLog.getText() + ".txt";
 
-        process.addPropertyChangeListener(new PropertyChangeListener() {
+      /*  process.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent pcEvt) {
-                if (SwingWorker.StateValue.DONE == pcEvt.getNewValue()) {
-                    JOptionPane.showMessageDialog(MainFrame.this, "Done!!!");
+                LongRunProcess pr = (LongRunProcess)pcEvt.getSource();
+// && pr.getWfValue() == 0
+                if (SwingWorker.StateValue.DONE == pcEvt.getNewValue() && pr.getWfValue() == 0) {
+                    System.out.println("pcEvt.getNewValue()=" + pcEvt.getNewValue() + " old="  + pcEvt.getOldValue());
+                    System.out.println("class = " + pcEvt.getSource().getClass());
+                    System.out.println("pr.getWfValue() = " + pr.getWfValue());
 
-                    if (checkBox2.isSelected()){
-                        System.out.println("pcEvt.getNewValue()=" + pcEvt.getNewValue() + " old="  + pcEvt.getOldValue());
-                        try {
-                            sleep(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        openLogFile(String.format("%s\\%s", path3, fileNameLog));
-                    }
                 }
             }
-        });
+        });*/
 
         try {
             process.execute();
@@ -251,16 +241,6 @@ public class MainFrame extends JFrame {
         }
 
     }
-
-    private void openLogFile(@NotNull String fullName){
-        try {
-            String string  = fullName.replace("\\","\\\\");
-            Process p = Runtime.getRuntime().exec(String.format("notepad %s", string));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
 
     Action actionExit = new AbstractAction("", ICON_EXIT) {
         private static final long serialVersionUID = 1L;

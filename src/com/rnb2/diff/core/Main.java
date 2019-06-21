@@ -1,9 +1,11 @@
 package com.rnb2.diff.core;
 
 import javax.swing.JFrame;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * @author budukh
+ * @author budukh.rn
  */
 public class Main {
 

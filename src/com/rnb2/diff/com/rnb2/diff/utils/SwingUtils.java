@@ -3,6 +3,9 @@ package com.rnb2.diff.com.rnb2.diff.utils;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * @author budukh.rn
+ */
 public class SwingUtils {
 
     private SwingUtils(){}

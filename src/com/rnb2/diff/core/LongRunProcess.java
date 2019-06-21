@@ -1,15 +1,16 @@
 package com.rnb2.diff.core;
 
 import com.rnb2.diff.com.rnb2.diff.utils.OperationExecutor;
+import com.sun.istack.internal.NotNull;
 
 import javax.swing.*;
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
+
+import static java.lang.Thread.sleep;
 
 /**
- * @author budukh
+ * @author budukh.rn
  */
 public class LongRunProcess extends SwingWorker {
 
@@ -22,6 +23,10 @@ public class LongRunProcess extends SwingWorker {
     private  String commandPath2;
 
     private  JFrame container;
+    private boolean openAfter;
+
+    private int wf = -1;
+    private Process process;
 
     @Override
     protected Object doInBackground() throws Exception {
@@ -32,9 +37,10 @@ public class LongRunProcess extends SwingWorker {
 
     private void doGo(){
         try {
-            ProcessBuilder pb = new ProcessBuilder();
+            ProcessBuilder  processBuilder = new ProcessBuilder();
+
             if(!fullReport.isEmpty()){
-                pb.command("java","-jar",
+                processBuilder.command("java","-jar",
                         commandPathDirTool+"\\"+nameTool,
                         "-i", commandPath1,
                         "-j", commandPath2,
@@ -42,7 +48,7 @@ public class LongRunProcess extends SwingWorker {
                         fullReport, ""
                 );
             }else {
-                pb.command("java","-jar",
+                processBuilder.command("java","-jar",
                     commandPathDirTool+"\\"+nameTool,
                     "-i", commandPath1,
                     "-j", commandPath2,
@@ -54,11 +60,15 @@ public class LongRunProcess extends SwingWorker {
                         "C:\\Work\\Tasks\\NDSAKELA-10226\\pp-13\\fb\\UR11402\\ROOT.NDS", "-o",
                         "C:\\Tmp\\summary_log23.txt");
             pb.directory(new File("c:\\Tools\\Diff_tool\\"));*/
-            pb.directory(new File(commandPathDirTool));
-            pb.redirectErrorStream(true);
-            Process process = pb.start();
+            processBuilder.directory(new File(commandPathDirTool));
 
-           /* BufferedReader reader =
+            //System.out.println("command " + processBuilder.command().toArray());
+            processBuilder.command().forEach(System.out::println);
+            process = processBuilder.inheritIO().start();
+           wf = process.waitFor();
+           //System.out.println("waitFor = " + wf);
+
+            /*BufferedReader reader =
                     new BufferedReader(new InputStreamReader(process.getInputStream()));
             StringBuilder builder = new StringBuilder();
             String line = null;
@@ -69,15 +79,29 @@ public class LongRunProcess extends SwingWorker {
             String rs = builder.toString();*/
             //System.out.println("result = " + rs);
 
-        } catch (IOException  e1) {
+        } catch (IOException | InterruptedException e1) {
             e1.printStackTrace();
         }
     }
+
 
     final Runnable taskGo = new Runnable(){
         public void run() {
             try {
                 doGo();
+
+                if(process.waitFor() == 0) {
+                    JOptionPane.showMessageDialog(container, "Done!!!");
+
+                    if (openAfter){
+                        try {
+                            sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        openLogFile(String.format("%s\\%s", commandPathDirOut, nameOut));
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -86,6 +110,14 @@ public class LongRunProcess extends SwingWorker {
 
 
     public LongRunProcess(){
+    }
+
+    public Process getProcess() {
+        return process;
+    }
+
+    public int getWfValue(){
+        return wf;
     }
 
     public LongRunProcess addPathDirTool(String path){
@@ -126,5 +158,19 @@ public class LongRunProcess extends SwingWorker {
     public LongRunProcess addContainer(JFrame mainFrame) {
         this.container = mainFrame;
         return this;
+    }
+
+    public LongRunProcess addOpenAfter(boolean openAfter) {
+        this.openAfter = openAfter;
+        return this;
+    }
+
+    private void openLogFile(@NotNull String fullName){
+        try {
+            String string  = fullName.replace("\\","\\\\");
+            Process p = Runtime.getRuntime().exec(String.format("notepad %s", string));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
