@@ -16,6 +16,8 @@ import java.io.*;
 import java.util.List;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author budukh.rn
@@ -24,7 +26,17 @@ public class MainFrame extends JFrame {
     private static final long serialVersionUID = 1L;
     private static final String DEFAULT_DIR = "C:\\";
 
-    private static final String C_TOOLS_DIFF_TOOL_DIFFER_1_0_SNAPSHOT_JAR = "C:\\tools\\Diff_tool\\differ-1.0-SNAPSHOT.jar";
+    private static final String C_TOOLS_DIFF_TOOL_DIFFER_1_0_SNAPSHOT_JAR;
+    private static final String DIFFER_NAME = "differ-1.0-SNAPSHOT.jar";
+    public static final String TXT_2 = "txt2";
+    public static final String TXT_1 = "txt1";
+    public static final String TXT_3 = "txt3";
+    private Logger logger = Logger.getLogger(MainFrame.class.getName());
+
+    static {
+        C_TOOLS_DIFF_TOOL_DIFFER_1_0_SNAPSHOT_JAR = "C:\\tools\\Diff_tool\\" + DIFFER_NAME;
+    }
+
     private static final Color titleColor = new Color(139, 26, 26);
     private static final String PATH_SRC = "/com/rnb2/diff/";
 
@@ -63,7 +75,7 @@ public class MainFrame extends JFrame {
     private Properties properties = new Properties();
 
     public MainFrame() {
-        setTitle("Gui for diff tool \"differ-1.0-SNAPSHOT.jar\"");
+        setTitle("Gui app for diff tool \"" + DIFFER_NAME + "\"");
         setSize(srcWidth, srcHeight);
         setLocationRelativeTo(null);
         Locale.setDefault(new Locale("ru", "RU"));
@@ -71,12 +83,12 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         try {
-            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");//com.jgoodies.looks.plastic.Plastic3DLookAndFeel//"com.sun.java.swing.plaf.nimbus.NimbusLookAndFeel");//javax.swing.plaf.metal.MetalLookAndFeel
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        initFilechooser();
+        initFileChooser();
         initDirChooser();
 
         JPanel panelMain = new JPanel(new GridLayout(4, 1));
@@ -87,15 +99,14 @@ public class MainFrame extends JFrame {
 
         fieldLog = new JTextField("summary_log");
 
-        panelMain.add(getBoxPanel("Тестируемая база 1:", button1, "txt1"));
-        panelMain.add(getBoxPanel("Тестируемая база 2:", button2, "txt2"));
-        panelMain.add(getBoxPanel("Лог:", button3, "txt3", fieldLog));
+        panelMain.add(getBoxPanel("Тестируемая база 1:", button1, TXT_1));
+        panelMain.add(getBoxPanel("Тестируемая база 2:", button2, TXT_2));
+        panelMain.add(getBoxPanel("Лог:", button3, TXT_3, fieldLog));
 
         checkBox.setText("Полный лох");
         checkBox2.setText("Открыть по завершению");
 
         panelMain.add(getBoxPanel(checkBox, checkBox2));
-
 
         final String fileName = getFileNameProperties();
         loadParameters(fileName);
@@ -108,7 +119,6 @@ public class MainFrame extends JFrame {
         toolbar.add(actionExit);
         toolbar.add(actionGo);
         toolbar.add(actionSetting);
-        //toolbar.add(checkBox);
 
         customNameTool = getNameTool(customDiffToolPath);
 
@@ -135,7 +145,7 @@ public class MainFrame extends JFrame {
                 .toString();
     }
 
-    private void initFilechooser() {
+    private void initFileChooser() {
         final NdsFilter filter = new NdsFilter();
         filter.addExtentions("nds");
         filter.setDescription("NDS Files");
@@ -149,7 +159,7 @@ public class MainFrame extends JFrame {
         chooserDir.setAcceptAllFileFilterUsed(false);
     }
 
-        private String getDirectory(String property) {
+    private String getDirectory(String property) {
         if (property != null && !property.isEmpty()) {
             return property.substring(0, property.contains(".") ? property.lastIndexOf('\\') : property.length());
             //return property.substring(0, property.lastIndexOf('\\'));
@@ -199,9 +209,9 @@ public class MainFrame extends JFrame {
 
         saveParameters(getFileNameProperties());
 
-        String path1 = map.get("txt1").getText();
-        String path2 = map.get("txt2").getText();
-        String path3 = map.get("txt3").getText();
+        String path1 = map.get(TXT_1).getText();
+        String path2 = map.get(TXT_2).getText();
+        String path3 = map.get(TXT_3).getText();
 
         fullReport = "";
         if (checkBox.isSelected())
@@ -238,6 +248,7 @@ public class MainFrame extends JFrame {
             process.execute();
         } catch (Exception ex) {
             ex.printStackTrace();
+            logger.log(Level.SEVERE, ex.getLocalizedMessage());
         }
 
     }
@@ -265,12 +276,12 @@ public class MainFrame extends JFrame {
 
                 if (r == JFileChooser.APPROVE_OPTION) {
                     String string = chooserNds.getSelectedFile().getPath();
-                    JTextField jTextField1 = map.get("txt1");
+                    JTextField jTextField1 = map.get(TXT_1);
                     jTextField1.setText(string);
 
                     chooserDir.setCurrentDirectory(currentDirectory);
                     String text = chooserNds.getCurrentDirectory() + "";
-                    JTextField jTextField = map.get("txt3");
+                    JTextField jTextField = map.get(TXT_3);
                     jTextField.setText(text);
                 }
             }
@@ -282,11 +293,11 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String property = properties.getProperty(PROP_PATH_DB2);
-                if (!map.get("txt2").getText().isEmpty()){
-                    property = getDirectory(map.get("txt2").getText());
+                if (!map.get(TXT_2).getText().isEmpty()){
+                    property = getDirectory(map.get(TXT_2).getText());
                 } else
                 if (property.isEmpty()){
-                    property = getDirectory(map.get("txt1").getText());
+                    property = getDirectory(map.get(TXT_1).getText());
                 }
                 chooserNds.setCurrentDirectory(new File(getDirectory(property)));
 
@@ -294,7 +305,7 @@ public class MainFrame extends JFrame {
 
                 if (r == JFileChooser.APPROVE_OPTION) {
                     String string = chooserNds.getSelectedFile().getPath();
-                    JTextField jTextField1 = map.get("txt2");
+                    JTextField jTextField1 = map.get(TXT_2);
                     jTextField1.setText(string);
                 }
             }
@@ -306,11 +317,11 @@ public class MainFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String property = properties.getProperty(PROP_PATH_LOG);
-                if (!map.get("txt3").getText().isEmpty()){
-                    property = getDirectory(map.get("txt3").getText());
+                if (!map.get(TXT_3).getText().isEmpty()){
+                    property = getDirectory(map.get(TXT_3).getText());
                 } else
                 if (property.isEmpty()){
-                    property = getDirectory(map.get("txt1").getText());
+                    property = getDirectory(map.get(TXT_1).getText());
                 }
 
                 chooserDir.setCurrentDirectory(new File(getDirectory(property)));
@@ -319,7 +330,7 @@ public class MainFrame extends JFrame {
 
                 if (r == JFileChooser.APPROVE_OPTION) {
                     String string = chooserDir.getSelectedFile() + "";
-                    JTextField jTextField1 = map.get("txt3");
+                    JTextField jTextField1 = map.get(TXT_3);
                     jTextField1.setText(string);
                 }
             }
@@ -338,7 +349,6 @@ public class MainFrame extends JFrame {
         periodPanel.add(Box.createHorizontalStrut(5));
         JTextField textField = new JTextField();
         map.putIfAbsent(key, textField);
-        textField.setEditable(false);
         setTextFieldValue(key);
 
         periodPanel.add(textField);
@@ -352,13 +362,13 @@ public class MainFrame extends JFrame {
         JTextField jTextField = map.get(key);
         String value = "";
         switch (key) {
-            case "txt1":
+            case TXT_1:
                 value = properties.getProperty(PROP_PATH_DB1);
                 break;
-            case "txt2":
+            case TXT_2:
                 value = properties.getProperty(PROP_PATH_DB2);
                 break;
-            case "txt3":
+            case TXT_3:
                 value = properties.getProperty(PROP_PATH_LOG);
                 break;
 
@@ -380,7 +390,6 @@ public class MainFrame extends JFrame {
         periodPanel.add(button);
         periodPanel.add(Box.createHorizontalStrut(5));
         JTextField textField = new JTextField();
-        textField.setEditable(false);
 
         periodPanel.add(textField);
         periodPanel.add(Box.createHorizontalStrut(3));
@@ -423,6 +432,21 @@ public class MainFrame extends JFrame {
         };
     }
 
+    private void loadProperties(File fileName) throws FileNotFoundException {
+        try (FileInputStream inStream = new FileInputStream(fileName)){
+            properties.load(inStream);
+
+            customDiffToolPath = (String) properties.getProperty(PROP_PATH_TOOL, "");
+            customNameTool = (String) properties.getProperty(PROP_NAME_TOOL, "");
+            map.get(TXT_1).setText((String) properties.getProperty(PROP_PATH_DB1, ""));
+            map.get(TXT_2).setText((String) properties.getProperty(PROP_PATH_DB2, ""));
+            map.get(TXT_3).setText((String) properties.getProperty(PROP_PATH_LOG, ""));
+        }catch (IOException e){
+            logger.log(Level.INFO, e.getLocalizedMessage());
+            throw new FileNotFoundException(fileName.getName());
+        }
+    }
+
     private void loadParameters(final String fileName) {
         File file = new File(fileName);
         File path = file.getParentFile();
@@ -431,19 +455,21 @@ public class MainFrame extends JFrame {
             path.mkdirs();
         }
         try {
-            FileInputStream propf = new FileInputStream(file);
+            loadProperties(file);
+           /* FileInputStream propf = new FileInputStream(file);
             properties.load(propf);
 
             customDiffToolPath = (String) properties.getProperty(PROP_PATH_TOOL, "");
             customNameTool = (String) properties.getProperty(PROP_NAME_TOOL, "");
-            map.get("txt1").setText((String) properties.getProperty(PROP_PATH_DB1, ""));
-            map.get("txt2").setText((String) properties.getProperty(PROP_PATH_DB2, ""));
-            map.get("txt3").setText((String) properties.getProperty(PROP_PATH_LOG, ""));
-            propf.close();
+            map.get(TXT_1).setText((String) properties.getProperty(PROP_PATH_DB1, ""));
+            map.get(TXT_2).setText((String) properties.getProperty(PROP_PATH_DB2, ""));
+            map.get(TXT_3).setText((String) properties.getProperty(PROP_PATH_LOG, ""));
+            propf.close();*/
         } catch (FileNotFoundException exception) {
             FileOutputStream out = null;
             try {
                 out = new FileOutputStream(fileName);
+
                 properties.put(PROP_PATH_TOOL, customDiffToolPath);
                 properties.put(PROP_PATH_DB1, "");
                 properties.put(PROP_PATH_DB2, "");
@@ -473,13 +499,13 @@ public class MainFrame extends JFrame {
     private void saveParameters(final String fileName) {
         try (FileOutputStream out = new FileOutputStream(fileName);) {
             properties.put(PROP_PATH_TOOL, customDiffToolPath);
-            properties.put(PROP_PATH_DB1, map.get("txt1").getText());
-            properties.put(PROP_PATH_DB2, map.get("txt2").getText());
-            properties.put(PROP_PATH_LOG, map.get("txt3").getText());
+            properties.put(PROP_PATH_DB1, map.get(TXT_1).getText());
+            properties.put(PROP_PATH_DB2, map.get(TXT_2).getText());
+            properties.put(PROP_PATH_LOG, map.get(TXT_3).getText());
             properties.put(PROP_NAME_TOOL, customNameTool);
             properties.store(out, "MainWindow");
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.log(Level.WARNING, "saveParameters(): " + e.getLocalizedMessage());
         }
     }
 
